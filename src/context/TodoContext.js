@@ -7,7 +7,7 @@ const TodoContext=({children})=>{
     
 const [state,setState]=useState({
   inputText : "",
-  todos:{},
+  todos:[],
   status:"all",
   filteredTodos:[]
 })
@@ -16,8 +16,7 @@ useEffect(()=>{
         axios.get('https://jsonplaceholder.typicode.com/todos')
         .then(response=>{
 
-             setState({todos:response.data.slice(1,10)})
-             console.log(state)
+             setState(preVal=>({...preVal , todos:response.data.slice(1,10)}))
         })
         .catch((error)=>{
           console.log(error)
@@ -32,15 +31,17 @@ useEffect(()=>{
 
 //functions
 const filterHandler=()=>{
+  console.log(state);
     switch (state.status){
      case 'completed':
-        setState({filteredTodos:state.todos.filter((todo)=>todo.completed===true)})
+        setState(preVal=>({...preVal , filteredTodos:state.todos.filter((todo)=>todo.completed===true)}))
        break;
      case 'uncompleted':
-        setState({filteredTodos:state.todos.filter((todo)=>todo.completed===false)})
+        setState(preVal=>({...preVal , filteredTodos:state.todos.filter((todo)=>todo.completed===false)}))
        break;
      default:
-        setState({filteredTodos:state.todos});
+      console.log(state.todos);
+        setState(preVal=>({...preVal , filteredTodos:state.todos}));
        break;
     }
   }
@@ -54,8 +55,8 @@ const getLocalTodos=()=>{
 
         localStorage.setItem("todos",JSON.stringify([]))
     }else{   
-        let todoLocal=JSON.parse(localStorage.getItem("todos"))
-        setState({todos:todoLocal})
+        let todoLocal=JSON.parse(localStorage.getItem("todos") ) & ''
+        // setState(preVal=>({...preVal , todos:todoLocal}))
     }
 }
 
