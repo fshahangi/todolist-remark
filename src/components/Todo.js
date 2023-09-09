@@ -1,23 +1,35 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { stateContext } from '../context/TodoContext'
+
 
 const Todo = (props) => {
+ 
+  const[state,setState]  =useContext(stateContext)
+
+  
     const deletehandler=()=>{
-       props.setTodos(props.todos.filter(item=>item.id!==props.todo.id))
+    
+      setState({todos:state.todos.filter(item=>item.id!==props.todo.id)})
     }
 
     const completeHandler=()=>{
-        props.setTodos(props.todos.map(item=>{
-         if(item.id===props.todo.id){
-            return{
-                ...item,completed:!item.completed
-            }
-         }
-         return item;
-        })) 
+ 
+ 
+        setState(state.todos.map(item=>{
+          if(item.id===props.todo.id){
+             return{
+                 ...item,completed:!item.completed
+             }
+          }
+          return item;
+         })) 
     }
+
+
   return (
     <div className='todo'>
-        <li className={`todo-item ${props.todo.completed ? "completed": ""}`}>{props.text}</li>
+       
+        <li className={`todo-item ${props.todo.completed ? "completed": ""}`}>{props.title}</li>
         <button className='complete-btn'  onClick={completeHandler}>
         <i className='fas fa-check'></i>
         </button>

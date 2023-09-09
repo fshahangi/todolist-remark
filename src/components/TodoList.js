@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Todo from './Todo'
+import { stateContext } from '../context/TodoContext'
 
-const TodoList = ({todos,setTodos,filteredTodos}) => {
+
+  const TodoList = () => {
+  const[state,setState]  =useContext(stateContext)
+
   return (
     <div>
       <div className="todo-container">
       <ul className="todo-list">
-        {filteredTodos.map(item=>{
-            return (<Todo text={item.text} key={todos.id} setTodos={setTodos} todos={todos} todo={item}/>) 
+  
+        {  
+        state.filteredTodos.map(item=>{
+           
+            return (<Todo title={item.title} key={state.todos.id}  todo={item}/>) 
         })}
         
       </ul>
