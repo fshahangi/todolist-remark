@@ -10,15 +10,15 @@ import { stateContext } from '../context/TodoContext'
 
 
     const inputtextHandler=(e)=>{
-      setState({inputText:e.target.value})
+      setState(preVal=>({...preVal , inputText:e.target.value}))
     }
     const submitTodoHandler=(e)=>{
        e.preventDefault();  
-       setState({todos:[...state.todos,{title:state.inputText, completed:false , id: Math.random() *1000}]})
-       setState({inputText:""})
+       setState(preVal =>({...preVal , todos:[...state.todos,{title:state.inputText, completed:false , id: Math.random() *1000}]}))
+       setState(preVal =>({...preVal , inputText:""}))
     };
     const statusHandler=(e)=>{
-      setState({status:e.target.value})
+      setState(preVal=>({...preVal , status:e.target.value}))
     }
   return (
     <div>
