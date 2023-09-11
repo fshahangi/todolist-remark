@@ -5,7 +5,7 @@ import Form from './components/Form';
 import TodoList from './components/TodoList';
 import axios from 'axios';
 
-function App() {
+function App() { 
   const[inputText,setInputText]  =useState('')
   const[todos,setTodos]  =useState([])
   const[status,setStatus]  =useState('all')
