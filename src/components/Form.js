@@ -1,29 +1,23 @@
-import React, { useContext } from 'react'
-import { stateContext } from '../context/TodoContext'
+import React from 'react'
 
-
-
-  const Form = () => {
-
-   const[state,setState]  =useContext(stateContext)
-
-
+const Form = ({setInputText,setTodos,todos,inputText,setStatus}) => {
 
     const inputtextHandler=(e)=>{
-      setState(preVal=>({...preVal , inputText:e.target.value}))
-    }
-    const submitTodoHandler=(e)=>{
-       e.preventDefault();  
-       setState(preVal =>({...preVal , todos:[...state.todos,{title:state.inputText, completed:false , id: Math.random() *1000}]}))
-       setState(preVal =>({...preVal , inputText:""}))
-    };
-    const statusHandler=(e)=>{
-      setState(preVal=>({...preVal , status:e.target.value}))
-    }
+        setInputText(e.target.value)
+      }
+      const submitTodoHandler=(e)=>{
+         e.preventDefault();  
+         setTodos([...todos,{title:inputText, completed:false , id: Math.random() *1000}])
+         setInputText("");
+      };
+      const statusHandler=(e)=>{
+        setStatus(e.target.value)
+      }
+
   return (
     <div>
       <form>
-      <input value={state.inputText} onChange={inputtextHandler} type="text" className="todo-input" />
+      <input value={inputText} onChange={inputtextHandler} type="text" className="todo-input" />
       <button  onClick={submitTodoHandler} className="todo-button" type="submit">
         <i className="fas fa-plus-square"></i>
       </button>
