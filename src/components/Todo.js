@@ -1,43 +1,41 @@
-import React, { useContext } from 'react'
-import { stateContext } from '../context/TodoContext'
+import React from "react";
 
+const Todo = ({ setInfo, info, todo, title }) => {
+  const deletehandler = () => {
+    setInfo((preVal) => ({
+      ...preVal,
+      todos: info.todos.filter((item) => item.id !== todo.id),
+    }));
+  };
 
-const Todo = (props) => {
- 
-  const[state,setState]  =useContext(stateContext)
-
-  
-    const deletehandler=()=>{
-    
-      setState(preVal =>({...preVal , todos:state.todos.filter(item=>item.id!==props.todo.id)}))
-    }
-
-    const completeHandler=()=>{
- 
- 
-        setState(preVal=>({...preVal , todos:state.todos.map(item=>{
-          if(item.id===props.todo.id){
-             return{
-                 ...item,completed:!item.completed
-             }
-          }
-          return item;
-         })})) 
-    }
-
-
+  const completeHandler = () => {
+    setInfo((preVal) => ({
+      ...preVal,
+      todos: info.todos.map((item) => {
+        if (item.id === todo.id) {
+          return {
+            ...item,
+            completed: !item.completed,
+          };
+        }
+        return item;
+      }),
+    }));
+  };
   return (
-    <div className='todo'>
-       
-        <li className={`todo-item ${props.todo.completed ? "completed": ""}`}>{props.title}</li>
-        <button className='complete-btn'  onClick={completeHandler}>
-        <i className='fas fa-check'></i>
-        </button>
-       <button className='trash-btn' onClick={deletehandler}>
-        <i className='fas fa-trash'></i>
-        </button>
-    </div>
-  )
-}
+    <div className="todo">
+      <li className={`todo-item ${todo.completed ? "completed" : ""}`}>
+        {title}
+      </li>
+      <button className="complete-btn" onClick={completeHandler}>
+        <i className="fas fa-check"></i>
+      </button>
 
-export default Todo
+      <button className="trash-btn" onClick={deletehandler}>
+        <i className="fas fa-trash"></i>
+      </button>
+    </div>
+  );
+};
+
+export default Todo;

@@ -1,25 +1,24 @@
-import React, { useContext } from 'react'
-import Todo from './Todo'
-import { stateContext } from '../context/TodoContext'
+import React from "react";
+import Todo from "./Todo";
 
-
-  const TodoList = () => {
-    const[state,setState]  =useContext(stateContext)
-    // console.log(state.filteredTodos);
-    
+const TodoList = ({ setInfo, info }) => {
   return (
     <div>
       <div className="todo-container">
-      <ul className="todo-list">
-        { state.filteredTodos.map((item)=>{
-           
-            return (<Todo title={item.title} key={state.todos.id}  todo={item}/>) 
-        })}
-        
-      </ul>
+        <ul className="todo-list">
+          {info.filteredTodos.map((item) => (
+            <Todo
+              setInfo={setInfo}
+              info={info}
+              title={item.title}
+              key={info.todos.id}
+              todo={item}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default TodoList
+export default TodoList;
