@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
-import { getLocalstorage, saveLocalstorage } from "./helper/Localstorage";
+import { useLocal } from "./helper/Localstorage";
 import { Service } from "./Service";
 
 function App() {
@@ -13,13 +13,34 @@ function App() {
   });
 
   useEffect(() => {
-    Service(setInfo);
-    getLocalstorage(setInfo, "todos");
+    //const varcache = cachefunction();
+    //console.log(varcache());
+    cachefunction()();
   }, []);
+
+  const localData = useLocal("todos");
+  const cachefunction = () => {
+    let cache = localData.getData();
+    return () => {
+      if (cache) {
+        setInfo((preVal) => ({ ...preVal, todos: cache }));
+        return cache;
+      } else {
+        Service().then((data) => {
+          setInfo((preVal) => ({
+            ...preVal,
+            todos: data.slice(1, 3),
+          }));
+          localData.setData(JSON.stringify(data));
+        });
+        // return info;
+      }
+    };
+  };
 
   useEffect(() => {
     filterHandler();
-    saveLocalstorage(info, "todos");
+    localData.setData(info.todos);
   }, [info.todos, info.status]);
 
   //functions

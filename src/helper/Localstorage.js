@@ -1,11 +1,12 @@
-export const saveLocalstorage = (info, key) => {
-  localStorage.setItem(key, JSON.stringify(info.todos));
-};
-export const getLocalstorage = (setInfo, key) => {
-  if (localStorage.getItem(key) === null) {
-    localStorage.setItem(key, JSON.stringify([]));
-  } else {
+export const useLocal = (key) => {
+  const setData = (value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const getData = () => {
     let todoLocal = JSON.parse(localStorage.getItem(key));
-    setInfo((preVal) => ({ ...preVal, todos: todoLocal }));
-  }
+    return todoLocal;
+    //setInfo((preVal) => ({ ...preVal, todos: todoLocal }));
+  };
+  return { setData, getData };
 };
