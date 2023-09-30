@@ -1,25 +1,42 @@
 import React, { useState } from "react";
+import { iTodo } from "../types/todo";
+import { iInfo } from "../types/info";
+import { iUsestate } from "../types/usestate";
 
-const Form = ({ setInfo, info }) => {
-  const [inputText, setInputText] = useState("");
-  const inputtextHandler = (e) => {
+interface FormProps {
+  setInfo: React.Dispatch<React.SetStateAction<iUsestate>>;
+  info: iInfo;
+}
+
+const Form = ({ setInfo, info }: FormProps) => {
+  const [inputText, setInputText] = useState<string>("");
+
+  const inputtextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
   };
-  const submitTodoHandler = (e) => {
+  const submitTodoHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
     setInfo((preVal) => ({
       ...preVal,
       todos: [
         ...info.todos,
-        { title: inputText, completed: false, id: Math.random() * 1000 },
+        {
+          title: inputText,
+          completed: false,
+          id: Math.random() * 1000,
+          userId: Math.random() * 1000,
+        },
       ],
     }));
 
     setInputText("");
   };
-  const statusHandler = (e) => {
-    setInfo((preVal) => ({ ...preVal, status: e.target.value }));
+  const statusHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInfo((preVal) => ({
+      ...preVal,
+      status: e.target.value as "all" | "uncompleted" | "completed",
+    }));
   };
 
   return (

@@ -1,6 +1,16 @@
 import React from "react";
+import { iInfo } from "../types/info";
+import { iTodo } from "../types/todo";
+import { iUsestate } from "../types/usestate";
 
-const Todo = ({ setInfo, info, todo, title }) => {
+interface TodoProps {
+  setInfo: React.Dispatch<React.SetStateAction<iUsestate>>;
+  info: iInfo;
+  todo: iTodo;
+  title: string;
+}
+
+const Todo = ({ setInfo, info, todo, title }: TodoProps) => {
   const deletehandler = () => {
     setInfo((preVal) => ({
       ...preVal,

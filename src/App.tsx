@@ -1,30 +1,32 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 import { useLocal } from "./helper/Localstorage";
 import { Service } from "./Service";
+import { iTodo } from "./types/todo";
+import { iUsestate } from "./types/usestate";
 
 function App() {
-  const [info, setInfo] = useState({
+  const [info, setInfo] = useState<iUsestate>({
     todos: [],
     status: "all",
     filteredTodos: [],
   });
 
   useEffect(() => {
-    //const varcache = cachefunction();
+    //const varcache = LoadDatafunction();
     //console.log(varcache());
-    cachefunction()();
+    LoadDatafunction()();
   }, []);
 
   const localData = useLocal("todos");
-  const cachefunction = () => {
+  const LoadDatafunction = () => {
     let cache = localData.getData();
     return () => {
-      if (cache) {
+      if (cache.length > 0) {
         setInfo((preVal) => ({ ...preVal, todos: cache }));
-        return cache;
+        // return cache;
       } else {
         Service().then((data) => {
           setInfo((preVal) => ({

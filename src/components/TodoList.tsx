@@ -1,7 +1,13 @@
 import React from "react";
 import Todo from "./Todo";
+import { iInfo } from "../types/info";
+import { iUsestate } from "../types/usestate";
 
-const TodoList = ({ setInfo, info }) => {
+interface TodoListProps {
+  setInfo: React.Dispatch<React.SetStateAction<iUsestate>>;
+  info: iInfo;
+}
+const TodoList = ({ setInfo, info }: TodoListProps) => {
   return (
     <div>
       <div className="todo-container">
@@ -11,7 +17,7 @@ const TodoList = ({ setInfo, info }) => {
               setInfo={setInfo}
               info={info}
               title={item.title}
-              key={info.todos.id}
+              // key={info.todos.id}
               todo={item}
             />
           ))}
