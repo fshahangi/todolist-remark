@@ -2,6 +2,7 @@ import React from "react";
 import { iInfo } from "../types/info";
 import { iTodo } from "../types/todo";
 import { iUsestate } from "../types/usestate";
+import { Link } from "react-router-dom";
 
 interface TodoProps {
   setInfo: React.Dispatch<React.SetStateAction<iUsestate>>;
@@ -35,7 +36,7 @@ const Todo = ({ setInfo, info, todo, title }: TodoProps) => {
   return (
     <div className="todo">
       <li className={`todo-item ${todo.completed ? "completed" : ""}`}>
-        {title}
+        <Link to={`/allproducts/${todo.id}`}>{title}</Link>
       </li>
       <button className="complete-btn" onClick={completeHandler}>
         <i className="fas fa-check"></i>

@@ -1,3 +1,4 @@
+import { iTodo } from "../types/todo";
 // export const useLocal = (key: string) => {
 //   const setData = (value) => {
 //     localStorage.setItem(key, JSON.stringify(value));
@@ -13,9 +14,9 @@
 import { useState } from "react";
 
 export const useLocal = (key: string) => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<iTodo[]>([]);
 
-  const setDataToLocalStorage = (value: any) => {
+  const setDataToLocalStorage = (value: iTodo[]) => {
     localStorage.setItem(key, JSON.stringify(value));
     setData(value);
   };

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { iTodo } from "../types/todo";
 import { iInfo } from "../types/info";
 import { iUsestate } from "../types/usestate";
 

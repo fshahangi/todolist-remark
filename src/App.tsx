@@ -4,8 +4,11 @@ import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 import { useLocal } from "./helper/Localstorage";
 import { Service } from "./Service";
-import { iTodo } from "./types/todo";
 import { iUsestate } from "./types/usestate";
+import Navbar from "./components/Navbar";
+import Profile from "./pages/Profile";
+import Products from "./pages/Products";
+import Home from "./pages/Home";
 
 function App() {
   const [info, setInfo] = useState<iUsestate>({
@@ -22,9 +25,9 @@ function App() {
 
   const localData = useLocal("todos");
   const LoadDatafunction = () => {
-    let cache = localData.getData();
+    const cache = localData.getData();
     return () => {
-      if (cache.length > 0) {
+      if (cache !== null && cache.length > 0) {
         setInfo((preVal) => ({ ...preVal, todos: cache }));
         // return cache;
       } else {
@@ -33,7 +36,7 @@ function App() {
             ...preVal,
             todos: data.slice(1, 3),
           }));
-          localData.setData(JSON.stringify(data));
+          localData.setData(data);
         });
         // return info;
       }
@@ -66,8 +69,24 @@ function App() {
     }
   };
 
+  let component;
+  switch (window.location.pathname) {
+    case "/":
+      component = <Home />;
+      break;
+    case "/Profile":
+      component = <Profile />;
+      break;
+    case "/Products":
+      component = <Products />;
+      break;
+  }
+
   return (
     <div className="App">
+      <Navbar />
+      <div className="container">{component}</div>
+
       <header>
         <h1> Todo List</h1>
       </header>
