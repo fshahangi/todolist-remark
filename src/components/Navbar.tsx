@@ -9,8 +9,8 @@ const Navbar = () => {
           Site TodoList
         </Link>
         <ul>
-          {/* <customLink>Products</customLink>
-          <customLink>Profile</customLink> */}
+          <Link to="/Filter">Filter</Link>|
+          <Link to="/ContactUs">Contact Us</Link>
         </ul>
       </nav>
     </div>

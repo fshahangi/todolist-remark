@@ -4,17 +4,30 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Products from "./pages/Products";
-import Profile from "./pages/Profile";
+import SingleProducts from "./pages/SingleProducts";
+import ContactUs from "./pages/ContactUs";
+import MainLayout from "./layout/MainLayout";
+import Filter from "./pages/Filter";
+import ShowFilter from "./pages/ShowFilter";
+import FilterLayout from "./layout/FilterLayout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}></Route>
-      <Route path="/allproducts" element={<Products />}></Route>
-      <Route path="/allproducts/:productsId" element={<Profile />}></Route>
-      <Route path="/profile" element={<Profile />}></Route>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<App />}></Route>
+        <Route path="/products" element={<App />}></Route>
+        <Route path="/products/:productId" element={<SingleProducts />}></Route>
+        <Route path="/contactus" element={<ContactUs />}></Route>
+      </Route>
+      <Route element={<FilterLayout />}>
+        <Route path="/filter" element={<Filter />}>
+          <Route index path="/filter/:filter" element={<ShowFilter />}></Route>
+          <Route path="/filter/:filter" element={<ShowFilter />}></Route>
+          <Route path="/filter/:filter" element={<ShowFilter />}></Route>
+        </Route>
+      </Route>
     </Routes>
   </BrowserRouter>
 );

@@ -15,6 +15,7 @@ const Form = ({ setInfo, info }: FormProps) => {
   };
   const submitTodoHandler = (e: React.FormEvent) => {
     e.preventDefault();
+    const autoid: number = info.todos.length;
 
     setInfo((preVal) => ({
       ...preVal,
@@ -23,8 +24,8 @@ const Form = ({ setInfo, info }: FormProps) => {
         {
           title: inputText,
           completed: false,
-          id: Math.random() * 1000,
-          userId: Math.random() * 1000,
+          id: autoid + 2,
+          userId: autoid + 2,
         },
       ],
     }));

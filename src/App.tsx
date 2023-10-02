@@ -6,9 +6,9 @@ import { useLocal } from "./helper/Localstorage";
 import { Service } from "./Service";
 import { iUsestate } from "./types/usestate";
 import Navbar from "./components/Navbar";
-import Profile from "./pages/Profile";
-import Products from "./pages/Products";
+import Profile from "./pages/Filter";
 import Home from "./pages/Home";
+import SingleProducts from "./pages/SingleProducts";
 
 function App() {
   const [info, setInfo] = useState<iUsestate>({
@@ -78,14 +78,14 @@ function App() {
       component = <Profile />;
       break;
     case "/Products":
-      component = <Products />;
+      component = <SingleProducts />;
       break;
   }
 
   return (
     <div className="App">
-      <Navbar />
-      <div className="container">{component}</div>
+      {/* <Navbar />
+      <div className="container">{component}</div> */}
 
       <header>
         <h1> Todo List</h1>

@@ -36,7 +36,9 @@ const Todo = ({ setInfo, info, todo, title }: TodoProps) => {
   return (
     <div className="todo">
       <li className={`todo-item ${todo.completed ? "completed" : ""}`}>
-        <Link to={`/allproducts/${todo.id}`}>{title}</Link>
+        <Link state={todo} to={`/products/${todo.id}`}>
+          {title}
+        </Link>
       </li>
       <button className="complete-btn" onClick={completeHandler}>
         <i className="fas fa-check"></i>
