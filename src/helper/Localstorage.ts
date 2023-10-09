@@ -14,8 +14,7 @@ import { iTodo } from "../types/todo";
 import { useState } from "react";
 
 export const useLocal = (key: string) => {
-  const [data, setData] = useState<iTodo[]>([]);
-
+  const setData = useState<iTodo[]>([])[1];
   const setDataToLocalStorage = (value: iTodo[]) => {
     localStorage.setItem(key, JSON.stringify(value));
     setData(value);

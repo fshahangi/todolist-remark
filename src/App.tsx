@@ -4,16 +4,16 @@ import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 import { useLocal } from "./helper/Localstorage";
 import { Service } from "./Service";
-import { iUsestate } from "./types/usestate";
-import Navbar from "./components/Navbar";
 import Profile from "./pages/Filter";
 import Home from "./pages/Home";
 import SingleProducts from "./pages/SingleProducts";
+import { iUsestate } from "./types/usestate";
+import { StatusEnum } from "./types/enum";
 
 function App() {
   const [info, setInfo] = useState<iUsestate>({
     todos: [],
-    status: "all",
+    status: StatusEnum.all,
     filteredTodos: [],
   });
 
@@ -51,13 +51,13 @@ function App() {
   //functions
   const filterHandler = () => {
     switch (info.status) {
-      case "completed":
+      case StatusEnum.completed:
         setInfo((preVal) => ({
           ...preVal,
           filteredTodos: info.todos.filter((todo) => todo.completed === true),
         }));
         break;
-      case "uncompleted":
+      case StatusEnum.uncompleted:
         setInfo((preVal) => ({
           ...preVal,
           filteredTodos: info.todos.filter((todo) => todo.completed === false),
@@ -78,6 +78,7 @@ function App() {
       component = <Profile />;
       break;
     case "/Products":
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       component = <SingleProducts />;
       break;
   }
@@ -86,7 +87,6 @@ function App() {
     <div className="App">
       {/* <Navbar />
       <div className="container">{component}</div> */}
-
       <header>
         <h1> Todo List</h1>
       </header>

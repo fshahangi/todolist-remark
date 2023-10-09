@@ -1,12 +1,12 @@
 import React from "react";
-import { iInfo } from "../types/info";
+
 import { iTodo } from "../types/todo";
 import { iUsestate } from "../types/usestate";
 import { Link } from "react-router-dom";
 
 interface TodoProps {
   setInfo: React.Dispatch<React.SetStateAction<iUsestate>>;
-  info: iInfo;
+  info: iUsestate;
   todo: iTodo;
   title: string;
 }

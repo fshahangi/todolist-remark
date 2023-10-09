@@ -1,5 +1,7 @@
+import { StatusEnum } from "./enum";
+
 export interface iUsestate {
   todos: iTodo[];
-  status: "all" | "uncompleted" | "completed";
+  status: StatusEnum;
   filteredTodos: iTodo[];
 }

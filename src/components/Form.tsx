@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { iInfo } from "../types/info";
 import { iUsestate } from "../types/usestate";
+import { StatusEnum } from "../types/enum";
 
 interface FormProps {
   setInfo: React.Dispatch<React.SetStateAction<iUsestate>>;
-  info: iInfo;
+  info: iUsestate;
 }
 
 const Form = ({ setInfo, info }: FormProps) => {
+  function stringToEnum<T>(enumObj: T, str: string): T[keyof T] {
+    return enumObj[str as keyof T]; // If no match is found
+  }
+
   const [inputText, setInputText] = useState<string>("");
 
   const inputtextHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,15 +37,16 @@ const Form = ({ setInfo, info }: FormProps) => {
     setInputText("");
   };
   const statusHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const statusEnum = stringToEnum(StatusEnum, e.target.value);
     setInfo((preVal) => ({
       ...preVal,
-      status: e.target.value as "all" | "uncompleted" | "completed",
+      status: statusEnum,
     }));
   };
 
   return (
     <div>
-      <form>
+      <form className="login-form">
         <input
           value={inputText}
           onChange={inputtextHandler}

@@ -1,11 +1,11 @@
 import React from "react";
 import Todo from "./Todo";
-import { iInfo } from "../types/info";
+
 import { iUsestate } from "../types/usestate";
 
 interface TodoListProps {
   setInfo: React.Dispatch<React.SetStateAction<iUsestate>>;
-  info: iInfo;
+  info: iUsestate;
 }
 const TodoList = ({ setInfo, info }: TodoListProps) => {
   return (

@@ -4,3 +4,4 @@ export interface iTodo {
   title: string;
   completed: boolean;
 }
+export type TlogIn = string | null;

@@ -21,6 +21,11 @@ form {
   justify-content: center;
   align-items: center;
 }
+.login-form {
+  min-height: 20vh;
+  justify-content: center;
+  align-items: center;
+}
 form input,
 form button {
   padding: 0.5rem;
@@ -58,6 +63,12 @@ form button:hover {
   justify-content: space-between;
   align-items: center;
   transition: all 1s ease;
+}
+.login-input {
+  padding: 0.5rem;
+  font-size: 2rem;
+  border: black;
+  background: white;
 }
 .filter-todo {
   padding: 1rem;

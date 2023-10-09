@@ -10,6 +10,9 @@ import MainLayout from "./layout/MainLayout";
 import Filter from "./pages/Filter";
 import ShowFilter from "./pages/ShowFilter";
 import FilterLayout from "./layout/FilterLayout";
+import ProtectedLayout from "./layout/ProtectedLayout";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,6 +23,7 @@ root.render(
         <Route path="/products" element={<App />}></Route>
         <Route path="/products/:productId" element={<SingleProducts />}></Route>
         <Route path="/contactus" element={<ContactUs />}></Route>
+        <Route path="/login" element={<Login />}></Route>
       </Route>
       <Route element={<FilterLayout />}>
         <Route path="/filter" element={<Filter />}>
@@ -27,6 +31,9 @@ root.render(
           <Route path="/filter/:filter" element={<ShowFilter />}></Route>
           <Route path="/filter/:filter" element={<ShowFilter />}></Route>
         </Route>
+      </Route>
+      <Route element={<ProtectedLayout />}>
+        <Route path="/profile" element={<Profile />}></Route>
       </Route>
     </Routes>
   </BrowserRouter>
